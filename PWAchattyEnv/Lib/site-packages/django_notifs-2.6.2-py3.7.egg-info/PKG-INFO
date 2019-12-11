@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: django-notifs
+Version: 2.6.2
+Summary: Re-usable notification app for Django
+Home-page: https://github.com/danidee10/django-notifs
+Author: Osaetin Daniel
+Author-email: osaetindaniel@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
