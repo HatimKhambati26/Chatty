@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'chat',
-    'notifications',
-    'channels',
+    # 'notifications',
+    # 'channels',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +62,7 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -87,19 +87,19 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'chatty.wsgi.application'
+WSGI_APPLICATION = 'chatty.wsgi.application'
 
-ASGI_APPLICATION = "chatty.asgi.application"
+# ASGI_APPLICATION = "chatty.asgi.application"
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'asgi_redis.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [('localhost', 6379)],
-        },
-        'ROUTING': 'chatty.routing.channel_routing',
-    }
-}
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'asgi_redis.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [('localhost', 6379)],
+#         },
+#         'ROUTING': 'chatty.routing.channel_routing',
+#     }
+# }
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -147,12 +147,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Cross-Origin Resource Sharing (CORS)
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Celery settings
 CELERY_TASK_ALWAYS_EAGER = False
 
 # notifications settings
-NOTIFICATIONS_CHANNELS = {
-   'websocket': 'chat.channels.BroadCastWebSocketChannel'
-}
+# NOTIFICATIONS_CHANNELS = {
+#    'websocket': 'chat.channels.BroadCastWebSocketChannel'
+# }

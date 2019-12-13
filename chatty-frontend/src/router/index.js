@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import Chat from '@/components/Chat'
 import UserAuth from '@/components/UserAuth'
 
-Vue.use(Router)
+
+Vue.use(Router);
 
 const router = new Router({
   routes: [
@@ -19,7 +20,7 @@ const router = new Router({
       component: UserAuth
     }
   ]
-})
+});
 
 router.beforeEach((to, from, next) => {
   if (sessionStorage.getItem('authToken') !== null || to.path === '/auth') {
@@ -27,6 +28,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next('/auth')
   }
-})
+});
 
 export default router

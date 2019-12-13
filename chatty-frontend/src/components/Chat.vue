@@ -19,7 +19,7 @@
                     </span>
                   </div>
                   <div class="col-sm-2">
-                    <img class="rounded-circle float-right"
+                    <img class="rounded-circle"
                          :src="`http://placehold.it/40/007bff/fff&text=${message.user.username[0].toUpperCase()}`"/>
                   </div>
                 </template>
@@ -28,7 +28,7 @@
                     <img class="rounded-circle"
                          :src="`http://placehold.it/40/333333/fff&text=${message.user.username[0].toUpperCase()}`"/>
                   </div>
-                  <div class="col-sm-7 float-left">
+                  <div class="col-sm-7">
                     <span class="card-text speech-bubble speech-bubble-peer">
                       {{ message.message }}
                     </span>
@@ -69,32 +69,30 @@
 
 <script>
 
-  // const $ = window.jQuery
+  const $ = window.jQuery
 
   export default {
     data() {
       return {
-        sessionStarted: false,
-        messages: [],
-        message: ''
+        sessionStarted: false, messages: [], message: ''
       }
     },
 
     created() {
-      console.dir(this)
-      this.username = sessionStorage.getItem('username');
+      this.username = sessionStorage.getItem('username')
 
       // Setup headers for all requests
       $.ajaxSetup({
         headers: {
           'Authorization': `Token ${sessionStorage.getItem('authToken')}`
         }
-      });
+      })
 
       if (this.$route.params.uri) {
         this.joinChatSession()
       }
-      // setInterval(this.fetchChatSessionHistory, 3000)
+
+      setInterval(this.fetchChatSessionHistory, 2000)
     },
 
     methods: {
@@ -111,6 +109,7 @@
 
       postMessage(event) {
         const data = {message: this.message}
+
         $.post(`http://localhost:8000/api/chats/${this.$route.params.uri}/messages/`, data, (data) => {
           this.messages.push(data)
           this.message = '' // clear the message after sending
@@ -118,12 +117,11 @@
           .fail((response) => {
             alert(response.responseText)
           })
-      }
-      ,
+      },
 
       joinChatSession() {
         const uri = this.$route.params.uri
-        // const $ = window.jQuery
+
         $.ajax({
           url: `http://localhost:8000/api/chats/${uri}/`,
           data: {username: this.username},
@@ -133,13 +131,12 @@
 
             if (user) {
               // The user belongs/has joined the session
-              this.sessionStarted = true;
+              this.sessionStarted = true
               this.fetchChatSessionHistory()
             }
           }
         })
-      }
-      ,
+      },
 
       fetchChatSessionHistory() {
         $.get(`http://127.0.0.1:8000/api/chats/${this.$route.params.uri}/messages/`, (data) => {
@@ -147,14 +144,12 @@
         })
       }
     }
-  }
 
-  // const $ = window.jQuery
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
   h1,
   h2 {
     font-weight: normal;

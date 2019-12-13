@@ -2,7 +2,7 @@
   "name": "chatty-frontend",
   "version": "1.0.0",
   "description": "A Vue.js Project using Django",
-  "author": "hatimkhambati26 <hatim.khambati26@gmail.com>",
+  "author": "Hatim",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

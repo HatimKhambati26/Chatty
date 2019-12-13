@@ -1,6 +1,7 @@
+<!--suppress ALL -->
 <template>
   <div class="container">
-    <h1 class="text-center">Welcome to Chatty!</h1>
+    <h1 class="text-center">Welcome to Chatire!</h1>
     <div id="auth-container" class="row">
       <div class="col-sm-4 offset-sm-4">
         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -28,14 +29,15 @@
                          required>
                 </div>
                 <div class="form-group col-md-6">
-                  <input v-model="password" type="password" class="form-control" id="password" placeholder="Password"
-                         required>
+                  <label><input v-model="password" type="password" class="form-control" id="password"
+                                placeholder="Password"
+                                required></label>
                 </div>
               </div>
               <div class="form-group">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" id="toc" required>
-                  <label class="form-check-label" for="toc">
+                  <label class="form-check-label" for="gridCheck">
                     Accept terms and Conditions
                   </label>
                 </div>
@@ -65,7 +67,7 @@
 </template>
 
 <script>
-  // const $ = window.jQuery // JQuery
+  const $ = window.jQuery // JQuery
 
   export default {
 
@@ -74,13 +76,13 @@
         email: '', username: '', password: ''
       }
     },
+
     methods: {
       signUp() {
-        $.post('http://localhost:8000/auth/users/',
-          this.$data, (data) => {
-            alert("Your account has been created. You will be signed in automatically")
-            this.signIn()
-          })
+        $.post('http://localhost:8000/auth/users', this.$data, (data) => {
+          alert("Your account has been created. You will be signed in automatically")
+          this.signIn()
+        })
           .fail((response) => {
             alert(response.responseText)
           })
@@ -89,7 +91,7 @@
       signIn() {
         const credentials = {username: this.username, password: this.password}
 
-        $.post('http://localhost:8000/auth/token/login/', credentials, (data) => {
+        $.post('http://localhost:8000/auth/token/login', credentials, (data) => {
           sessionStorage.setItem('authToken', data.auth_token)
           sessionStorage.setItem('username', this.username)
           this.$router.push('/chats')
@@ -99,9 +101,9 @@
           })
       }
     }
-  }
 
-  // const $ = window.jQuery
+
+  }
 </script>
 
 <style scoped>
