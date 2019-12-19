@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'chat',
-    # 'notifications',
+    'notifications',
     # 'channels',
 ]
 
@@ -154,6 +154,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 CELERY_TASK_ALWAYS_EAGER = False
 
 # notifications settings
-# NOTIFICATIONS_CHANNELS = {
-#    'websocket': 'chat.channels.BroadCastWebSocketChannel'
-# }
+NOTIFICATIONS_CHANNELS = {
+   'websocket': 'chat.channels.BroadCastWebSocketChannel'
+}
+

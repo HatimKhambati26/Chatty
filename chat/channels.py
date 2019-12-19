@@ -7,6 +7,7 @@ import pika
 from notifications.channels import BaseNotificationChannel
 
 
+# noinspection PyMethodMayBeStatic
 class BroadCastWebSocketChannel(BaseNotificationChannel):
     """Fanout notification for RabbitMQ."""
 
@@ -22,8 +23,17 @@ class BroadCastWebSocketChannel(BaseNotificationChannel):
     def construct_message(self):
         """Construct the message to be sent."""
         extra_data = self.notification_kwargs['extra_data']
+        print(self.notification_kwargs)
+        for k, v in self.notification_kwargs.items():
+            print(k, v)
 
-        return dumps(extra_data['message'])
+        # return dumps(extra_data['message'])
+        new_message = {
+            'user': extra_data['user'],
+            'message': extra_data['message']
+        }
+
+        return dumps(new_message)
 
     def notify(self, message):
         """put the message of the RabbitMQ queue."""
